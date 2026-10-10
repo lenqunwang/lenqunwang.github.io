@@ -1,0 +1,46 @@
+# ============================================================
+# NexT 主题配置（Alternate Theme Config）
+#
+# 这里只写「要覆盖主题默认值」的部分，其余自动沿用
+# node_modules/hexo-theme-next/_config.yml 里的默认值。
+# 主题全部可配置项和默认值见：https://theme-next.js.org/docs/
+# 改完任意配置后执行：hexo clean && hexo g
+# ============================================================
+
+# 主题方案，可选 Muse | Mist | Pisces | Gemini
+# Muse / Mist：单栏，侧边栏在头部下方；Pisces / Gemini：左右双栏
+scheme: Gemini
+
+# 深色模式（右上角会出现切换按钮）
+darkmode: true
+
+# 顶部导航菜单，格式：名称: 路径 || 图标
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  about: /about/ || fa fa-user
+
+menu_settings:
+  icons: true
+  badges: false
+
+# 文章内的目录
+toc:
+  enable: true
+  number: true
+  wrap: false
+  expand_all: false
+  max_depth: 6
+
+# 本地搜索（依赖 hexo-generator-searchdb，已随本次搭建安装）
+local_search:
+  enable: true
+  top_n_per_article: 1
+  unescape: false
+  preload: true
+
+# 回到顶部
+back2top:
+  enable: true
+  sidebar: false
+  scrollpercent: true
