@@ -110,5 +110,15 @@ theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
+##
+## 本博客用的是 GitHub Actions 自动部署（见 .github/workflows/pages.yml），
+## 推送到 main 分支即自动发布，所以这里保持留空，不需要 hexo-deployer-git。
+##
+## 如果你以后想改用经典方式（hexo d），再按下面填，并同步把仓库
+## Settings -> Pages -> Source 改成对应分支：
+## deploy:
+##   type: git
+##   repo: https://github.com/lenqunwang/lenqunwang.github.io.git
+##   branch: gh-pages
 deploy:
   type: ''

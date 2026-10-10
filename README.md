@@ -133,16 +133,47 @@ CDN:
 
 ## 部署到 GitHub Pages
 
-1. 在 GitHub 上新建一个**公开**仓库。想让站点地址是 `https://用户名.github.io`，仓库名必须写成 `用户名.github.io`；否则地址是 `https://用户名.github.io/仓库名/`。
-2. 本地关联远端并推送：
+本博客使用 **GitHub Actions 自动部署**：代码推到 `main`，GitHub 自动构建并发布。
+好处是不需要 `hexo-deployer-git` 插件、不需要个人访问令牌（PAT）、源码和产物也不会混在同一个分支里。
+
+### 首次上线（只需做一次）
+
+1. 在 GitHub 上新建一个**公开**仓库，仓库名填 `lenqunwang.github.io`。
+   用这个仓库名，站点地址就是 `https://lenqunwang.github.io`（与 `_config.yml` 里的 `url` 一致）。
+   若想用别的仓库名（例如 `blog`），站点地址会变成 `https://lenqunwang.github.io/blog/`，
+   此时必须把 `_config.yml` 的 `url` 改成 `https://lenqunwang.github.io/blog`，并执行
+   `git remote set-url origin https://github.com/lenqunwang/blog.git`。
+
+2. 推送代码（远端本仓库已配好，直接推即可）：
 
    ~~~bash
-   git remote add origin https://github.com/用户名/仓库名.git
    git push -u origin main
    ~~~
 
 3. 仓库 **Settings → Pages**，把 **Source** 改成 **GitHub Actions**。
-4. 之后每次推送到 `main`，Actions 会自动构建并发布。
+
+4. 等 1～2 分钟，访问 https://lenqunwang.github.io 。
+
+### 之后每次发布
+
+~~~bash
+git add -A && git commit -m "更新" && git push
+~~~
+
+推上去就自动构建发布，不需要 `hexo generate`，也不需要 `hexo deploy`。
+
+### 备选：hexo-deployer-git 经典方式
+
+如果你更喜欢教程里那种 `hexo d` 一键发布，需要额外做这些事（二选一，不要和 Actions 同时用）：
+
+1. 安装插件：`npm install hexo-deployer-git --save`
+2. 在 `_config.yml` 里填 `deploy:`（文件里有注释好的模板，取消注释即可），
+   注意**源码和产物必须放不同分支**：源码留在 `main`，产物推到 `gh-pages`
+3. 把仓库 **Settings → Pages → Source** 改成 `gh-pages` 分支
+4. 发布命令：`hexo clean && hexo deploy`
+
+注意事项：HTTPS 推送需要凭据（Windows 凭据管理器里要有你的 PAT）；另外改用这条路之后，
+`.github/workflows/pages.yml` 会因为 Pages 已切到分支模式而每次都构建失败，需要把该文件删掉。
 
 ### 别忘了改 url
 
