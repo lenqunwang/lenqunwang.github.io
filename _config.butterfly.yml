@@ -1,0 +1,108 @@
+# ============================================================
+# Butterfly 主题配置（Alternate Theme Config）
+#
+# 这里只写「要覆盖主题默认值」的项，其余全部沿用
+# node_modules/hexo-theme-butterfly/_config.yml 里的默认值
+# （Hexo 会把两份配置做深合并）。
+#
+# 想调别的参数：到上面那个文件里找到键名，原样抄到这里再改。
+# 官方中文文档：https://butterfly.js.org/
+# 改完执行：hexo clean && hexo server
+# ============================================================
+
+# ---------------- 导航栏 ----------------
+nav:
+  display_title: true # 显示站点标题
+  display_post_title: true # 进入文章后标题换成文章名
+  fixed: true # 导航栏固定在顶部，滚动时不消失
+
+# 顶部菜单，格式：显示名: 路径 || 图标
+# 图标去 https://fontawesome.com/icons 挑，复制类名即可
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+  关于: /about/ || fas fa-heart
+
+# 站点图标（用主题自带的那张，避免 404）
+favicon: /img/favicon.ico
+
+# ---------------- 代码块：写项目笔记的主场 ----------------
+code_blocks:
+  theme: light # darker / pale night / light / ocean / false
+  macStyle: true # macOS 风格窗口（三个小圆点）
+  height_limit: 500 # 超过 500px 就折叠，防止长代码刷屏
+  word_wrap: false
+  copy: true # 右上角复制按钮
+  language: true # 左上角语言标签
+  shrink: false # 显示展开 / 收起按钮
+
+# ---------------- 首页 ----------------
+# 首页顶部大图（放插画的位置）：把图片放进 source/img/ 后取消注释
+# index_img: /img/banner.jpg
+# 归档页顶部大图
+# archive_img: /img/archive.jpg
+
+# 首页打字机副标题
+subtitle:
+  enable: true
+  effect: true # 打字机效果
+  source: false # 不调用第三方「一言」API，避免依赖外部服务
+  sub:
+    - 记录二次元插画
+    - 记录项目代码
+    - 记录每一次折腾
+
+# 文章列表封面布局
+# 1 左图右文 | 2 右图左文 | 3 左右交替 | 4 上图下文
+# 5 文案盖在封面上 | 6 瀑布流 | 7 瀑布流 + 文案盖在封面上
+index_layout: 3
+
+# ---------------- 文章页 ----------------
+toc:
+  post: true # 显示文章目录
+  number: true
+  expand: false
+
+# ---------------- 外观 ----------------
+darkmode:
+  enable: true
+  button: true # 右下角深色模式按钮
+  autoChangeMode: false # 不跟随系统，手动切换
+
+# 图片灯箱：点击插画放大、可左右翻页、可下载原图
+lightbox: fancybox
+
+# 图片懒加载：插画多的页面加载更快
+lazyload:
+  enable: true
+  field: site
+  placeholder:
+  blur: false
+
+# ---------------- 搜索 ----------------
+# 复用已装的 hexo-generator-searchdb。
+# 站点 _config.yml 里的 search.path 必须指向 search.xml，否则搜索框拿不到数据。
+search:
+  use: local_search
+  placeholder: '搜索文章…'
+  local_search:
+    preload: true # 打开页面就预载索引，点搜索秒出结果
+    top_n_per_article: 1
+    unescape: false
+
+# ---------------- CDN（重要，别删） ----------------
+# 主题默认走 jsdelivr，国内基本连不上，会导致图标 / 灯箱 / 搜索全部失效。
+# 这里换成 staticfile（七牛，国内节点）。
+# 若你的读者主要在海外，把 third_party_provider 改成 cdnjs 即可。
+CDN:
+  internal_provider: local
+  third_party_provider: custom
+  version: true
+  custom_format: https://cdn.staticfile.net/${cdnjs_name}/${version}/${min_cdnjs_file}
+
+# ⚠️ 提醒：canvas_ribbon / canvas_nest / click_heart / fireworks /
+# activate_power_mode / sharejs 这几个特效请不要开启。
+# 它们依赖 npm 包 butterfly-extsrc，而该包不在 cdnjs / staticfile 上，
+# 在当前 CDN 方案下会 404，页面会报错。
