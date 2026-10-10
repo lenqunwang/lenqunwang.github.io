@@ -44,8 +44,10 @@
 | `source/_posts/` | 文章，一篇一个 Markdown 文件 |
 | `source/img/` | 站内图片，文章里用 `/img/xxx.jpg` 引用 |
 | `source/about/index.md` | 「关于」页面 |
+| `source/gallery/index.md` | 「图集」页面，插画按题材分组 |
 | `source/tags/index.md` | 「标签」页面（`type: tags` 这行不要删） |
 | `source/categories/index.md` | 「分类」页面（`type: categories` 这行不要删） |
+| `picture/` | 你自己放原图的文件夹，**不会**提交到仓库（已在 `.gitignore` 里） |
 | `.github/workflows/pages.yml` | 自动部署到 GitHub Pages 的工作流 |
 
 ## 主题配置怎么改
@@ -90,7 +92,12 @@
 {% endgallery %}
 ~~~
 
-想一开始只显示 6 张、点「展开」再看全部，把第一行写成 `{% gallery false,6,6 %}`。
+标签里的三个参数依次是 `{% gallery 按钮,每次加载数,首次显示数 %}`。
+
+**这里有个坑**：默认参数是 `{% gallery false,10,10 %}`，也就是只显示 10 张，第 11 张起**直接消失**，而且没有按钮可以展开。所以：
+
+- 图片超过 10 张、想一次全显示 → 写成 `{% gallery false,60,60 %}`
+- 想先显示 10 张、底部带「加载更多」按钮 → 写成 `{% gallery true,10,10 %}`
 
 ### 3. 相册分组封面
 
